@@ -1,0 +1,3 @@
+[submodule "SemI/DM/ChestXRay/covid-chestxray-dataset"]
+	path = SemI/DM/ChestXRay/covid-chestxray-dataset
+	url = https://github.com/ieee8023/covid-chestxray-dataset
