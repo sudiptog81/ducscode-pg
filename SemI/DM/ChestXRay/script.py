@@ -1,4 +1,5 @@
 from os import path, makedirs
+from glob import glob
 from shutil import copy
 
 from tqdm import tqdm
@@ -17,3 +18,8 @@ for index, row in tqdm(metadata_df.iterrows(), total=metadata_df.shape[0]):
       makedirs(view_dest_folder)
     copy(path.join(DATASET_FOLDER, row['folder'], row['filename']), view_dest_folder)
 
+print('Number of PA images copied:', len(glob('filtered_data/PA/*')))
+print('Number of AP images copied:', len(glob('filtered_data/AP/*')))
+
+print('Number of PA views in dataset:', metadata_df[metadata_df['view'] == 'PA'].shape[0])
+print('Number of AP views in dataset:', metadata_df[metadata_df['view'] == 'AP'].shape[0])
