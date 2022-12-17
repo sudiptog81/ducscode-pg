@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[affil-it]{authblk}
+\usepackage{graphicx}
+\usepackage[english]{isodate}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{algorithm2e}
+\usepackage{csvsimple}
+\usepackage{longtable}
+\usepackage{hyperref}
+
+\title{Lab Report 1}
+\author{Sudipto Ghosh\\\it{MCSC101 -- M. Sc. Semester I}}
+\affil{Department of Computer Science\\University of Delhi}
+\date{\printdayoff December 15, 2022}
+
+\begin{document}
+\maketitle
+
+\section{Insertion Sort}
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+\begin{algorithm}
+\caption{Insertion Sort}
+\label{alg:one}
+\KwData{Array $A[1..n]$, Array Size $n$}
+\For{$i$ = $2..n$}{
+    $Insert(A[1...i-1],i)$ \Comment{this function searches for an appropriate
+    location $j$ to insert $A[i]$ in $A[1...i-1]$ so that $A[1...i]$ is sorted, and inserts $A[i]$ in the $j^{th}$ location}
+}
+\end{algorithm}
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+\begin{algorithm}
+\caption{Insert}
+\label{alg:two}
+\KwData{Array $A[1..i]$, Index $i$}
+$j \gets i - 1$\;
+$key \gets A[i]$\;
+\While{$j \geq 1$}{
+    \Comment{compare $A[j]$ and $key$}
+    \eIf{$A[j] > key$}{
+        $A[j + 1] \gets A[j]$\;
+        $j \gets j - 1$\;
+    }{
+        break\;
+    }
+}
+\Comment{insert $A[i]$ in the $j^{th}$ location}
+$A[j + 1] \gets key$\;
+\end{algorithm}
+\section{Solutions}
+\subsection{Problem 1}
+The possible locations that $A[i]$ may take in the $i^{th}$ iteration are $1...i$ where $1 \leq i \leq n$.
+
+\subsection{Problem 2}
+The number of comparisons performed by Insertion Sort to insert $A[i]$ in location $j$ is given by $i - j + 1$ or $i - j$, which is supported by comparing the observed values and the value of the expression for all values of $i$ and $j$ as shown in \hyperref[sec:data]{this table}.
+
+\subsection{Problem 3}
+On running Insertion Sort for all possible permutations of 1, 2, 3, 4, we observe the following behaviour.\\~\\
+For $i=1$, all $A[i]$ get placed at location $j=1$, with probability 1.\\~\\
+For $i=2$, we have
+\csvautolongtable[respect all]{occ2.csv}
+We observe that the probabilities of $A[i]$ to get placed in $j=1$ and $j=2$ are equal and given by $1/2$.\\~\\
+For $i=3$, we have
+\csvautolongtable[respect all]{occ3.csv}
+We observe that the probabilities of $A[i]$ to get placed in $j=1$, $j=2$ and $j=3$ are equal and given by $1/3$.\\~\\
+For $i=4$, we have
+\csvautolongtable[respect all]{occ4.csv}
+We observe that the probabilities of $A[i]$ to get placed in $j=1$, $j=2$, $j=3$ and $j=4$ are equal and given by $1/4$.\\\\
+We can thus say that the probability that $A[i]$ will be inserted at the $j^{th}$ location is $1/i$. $\blacksquare$
+\subsubsection{Part (a)}
+For every $i=2..4$, we report the total number of comparisons done to insert $A[i]$ to the $j^{th}$ location and compute the average number of comparisons over all possible permutations. The observations are recorded in the table below.
+\csvautolongtable[respect all]{comps.csv}
+\subsubsection{Part (b)}
+We construct a 2D-table with $i$ in rows and $j$ in columns where each $P[i,j]$ represents the probability that $A[i]$ will be inserted in location $j$ in the $i^{th}$ iteration.
+\csvautolongtable[respect all]{probs.csv}
+\subsubsection{Part (c)}
+TODO.
+\subsection{Problem 4}
+TODO.
+\section{Raw Data}
+\label{sec:data}
+\csvautolongtable[respect all]{sort.csv}
+\end{document}
