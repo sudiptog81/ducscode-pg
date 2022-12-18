@@ -1,0 +1,61 @@
+permutation 1: 5 2 3 
+	for i = 2, 
+		inserted 2 at j = 1
+		comparisons: 1
+	for i = 3, 
+		inserted 3 at j = 2
+		comparisons: 2
+	total comparisons: 3
+sorted: 2 3 5 
+------------------------
+permutation 2: 2 5 3 
+	for i = 2, 
+		inserted 5 at j = 2
+		comparisons: 1
+	for i = 3, 
+		inserted 3 at j = 2
+		comparisons: 2
+	total comparisons: 3
+sorted: 2 3 5 
+------------------------
+permutation 3: 2 3 5 
+	for i = 2, 
+		inserted 3 at j = 2
+		comparisons: 1
+	for i = 3, 
+		inserted 5 at j = 3
+		comparisons: 1
+	total comparisons: 2
+sorted: 2 3 5 
+------------------------
+permutation 4: 3 2 5 
+	for i = 2, 
+		inserted 2 at j = 1
+		comparisons: 1
+	for i = 3, 
+		inserted 5 at j = 3
+		comparisons: 1
+	total comparisons: 2
+sorted: 2 3 5 
+------------------------
+permutation 5: 5 3 2 
+	for i = 2, 
+		inserted 3 at j = 1
+		comparisons: 1
+	for i = 3, 
+		inserted 2 at j = 1
+		comparisons: 2
+	total comparisons: 3
+sorted: 2 3 5 
+------------------------
+permutation 6: 3 5 2 
+	for i = 2, 
+		inserted 5 at j = 2
+		comparisons: 1
+	for i = 3, 
+		inserted 2 at j = 1
+		comparisons: 2
+	total comparisons: 3
+sorted: 2 3 5 
+------------------------
+Average Number of Comparisons Done: 16

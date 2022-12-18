@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-ofstream fout("sort.csv");
+ofstream fout("random.csv");
+
+const int SIZE = 3;
 
 int totComp = 0;
 int numPerm = 0;
@@ -38,17 +40,17 @@ int insert(int *A, int i)
 int insertionSort(int *A, int n)
 {
   int iterComp, totComp = 0;
-  int C[4];
-  for (int i = 0; i < 4; i++)
+  int C[SIZE];
+  for (int i = 0; i < n; i++)
   {
     C[i] = A[i];
   }
   for (int i = 1; i < n; i++)
   {
-    for (int j = 0; j < 4; j++)
+    for (int j = 0; j < n; j++)
     {
       fout << C[j];
-      if (j != 3)
+      if (j != 2)
         fout << " ";
     }
     cout << "\tfor i = " << i + 1 << ", " << endl;
@@ -69,7 +71,7 @@ void print(int *A, int n)
   for (int i = 0; i < n; i++)
   {
     cout << A[i];
-    if (i != 3)
+    if (i != SIZE)
       cout << " ";
   }
   cout << endl;
@@ -83,16 +85,16 @@ void generatePermutationsAndSort(int *A, int n)
 {
   if (n == 1)
   {
-    int B[4];
+    int B[SIZE];
     cout << "permutation " << ++numPerm << ": ";
-    print(A, 4);
-    for (int i = 0; i < n; i++)
+    print(A, SIZE);
+    for (int i = 0; i < SIZE; i++)
     {
       B[i] = A[i];
     }
-    totComp += insertionSort(B, n);
+    totComp += insertionSort(B, SIZE);
     cout << "sorted: ";
-    print(B, n);
+    print(B, SIZE);
     cout << "------------------------" << endl;
     return;
   }
@@ -107,8 +109,14 @@ void generatePermutationsAndSort(int *A, int n)
 
 int main(void)
 {
-  int B[] = {1, 2, 3, 4};
+  srand(time(0));
+
+  int B[SIZE];
+  for (int i = 0; i < SIZE; i++)
+  {
+    B[i] = rand() % 10 + 1;
+  }
   fout << "permutation,i,j,comparisons\n";
-  generatePermutationsAndSort(B, 4);
+  generatePermutationsAndSort(B, SIZE);
   cout << "Average Number of Comparisons Done: " << totComp << endl;
 }
