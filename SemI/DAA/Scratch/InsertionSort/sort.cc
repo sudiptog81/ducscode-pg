@@ -39,13 +39,13 @@ int insertionSort(int *A, int n)
 {
   int iterComp, totComp = 0;
   int C[4];
-  for (int i = 0; i < 4; i++)
+  for (int i = 0; i < n; i++)
   {
     C[i] = A[i];
   }
   for (int i = 1; i < n; i++)
   {
-    for (int j = 0; j < 4; j++)
+    for (int j = 0; j < n; j++)
     {
       fout << C[j];
       if (j != 3)
@@ -86,13 +86,13 @@ void generatePermutationsAndSort(int *A, int n)
     int B[4];
     cout << "permutation " << ++numPerm << ": ";
     print(A, 4);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 4; i++)
     {
       B[i] = A[i];
     }
-    totComp += insertionSort(B, n);
+    totComp += insertionSort(B, 4);
     cout << "sorted: ";
-    print(B, n);
+    print(B, 4);
     cout << "------------------------" << endl;
     return;
   }
