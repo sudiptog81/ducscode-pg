@@ -310,4 +310,4 @@ permutation 24: 1 2 3 4
 	total comparisons: 3
 sorted: 1 2 3 4
 ------------------------
-Average Number of Comparisons Done: 118
+Total Number of Comparisons Done: 118

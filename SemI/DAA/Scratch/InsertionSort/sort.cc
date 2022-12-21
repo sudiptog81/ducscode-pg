@@ -6,6 +6,12 @@ ofstream fout("sort.csv");
 int totComp = 0;
 int numPerm = 0;
 
+/**
+ * Searches for the correct position of the element at index i in the array A
+ * in A[1..i] and inserts it there.
+ * Input: array A, index i
+ * Output: number of comparisons done to insert the element A[i]
+ */
 int insert(int *A, int i)
 {
   int comp = 0;
@@ -35,6 +41,11 @@ int insert(int *A, int i)
   return comp;
 }
 
+/**
+ * Sorts the array A using insertion sort by calling the insert function
+ * Input: array A, size of array n
+ * Output: total number of comparisons done for the permutation
+ */
 int insertionSort(int *A, int n)
 {
   int iterComp, totComp = 0;
@@ -53,7 +64,7 @@ int insertionSort(int *A, int n)
     }
     cout << "\tfor i = " << i + 1 << ", " << endl;
     fout << "," << i + 1 << ",";
-    iterComp = insert(A, i);
+    iterComp = insert(A, i); // call to insert function
     cout << "\t\tcomparisons: " << iterComp << endl;
     fout << iterComp << "\n";
     totComp += iterComp;
@@ -64,6 +75,9 @@ int insertionSort(int *A, int n)
   return totComp;
 }
 
+/**
+ * Prints the array A of size n
+ */
 void print(int *A, int n)
 {
   for (int i = 0; i < n; i++)
@@ -110,5 +124,9 @@ int main(void)
   int B[] = {1, 2, 3, 4};
   fout << "permutation,i,j,comparisons\n";
   generatePermutationsAndSort(B, 4);
-  cout << "Average Number of Comparisons Done: " << totComp << endl;
+  cout << "Total Number of Comparisons Done: " << totComp << endl;
+  fout.close();
+  system("python pivot.py sort.csv 4 occ");
+  system("python sum-avg.py sort.csv 4 comps");
+  return 0;
 }

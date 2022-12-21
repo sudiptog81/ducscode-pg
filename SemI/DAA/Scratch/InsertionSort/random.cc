@@ -118,5 +118,7 @@ int main(void)
   }
   fout << "permutation,i,j,comparisons\n";
   generatePermutationsAndSort(B, SIZE);
-  cout << "Average Number of Comparisons Done: " << totComp << endl;
+  cout << "Total Number of Comparisons Done: " << totComp << endl;
+  fout.close();
+  system("python pivot.py random.csv 3 occ rand");
 }

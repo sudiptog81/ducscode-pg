@@ -1,4 +1,4 @@
-Permutation,i=2,i=3,i=4,Total Comparisons
+Permutation,i=2,i=3,i=4,Sum
 1 2 3 4,1,1,1,3
 1 2 4 3,1,1,2,4
 1 3 2 4,1,2,1,4
@@ -24,4 +24,4 @@ Permutation,i=2,i=3,i=4,Total Comparisons
 4 3 1 2,1,2,3,6
 4 3 2 1,1,2,3,6
 Sum,24,40,54,118
-Average,1,1.66666666666667,2.25,4.91666666666667
+Average,1.0000,1.6667,2.2500,4.9167
