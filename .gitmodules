@@ -1,3 +1,9 @@
 [submodule "SemI/DM/ChestXRay/covid-chestxray-dataset"]
 	path = SemI/DM/ChestXRay/covid-chestxray-dataset
 	url = https://github.com/ieee8023/covid-chestxray-dataset
+[submodule "SemI/AI/pagan"]
+	path = SemI/AI/pagan
+	url = https://github.com/daboth/pagan.git
+[submodule "SemI/AI/pade"]
+	path = SemI/AI/pade
+	url = https://github.com/grei-ufc/pade
