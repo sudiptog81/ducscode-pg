@@ -1,0 +1,5 @@
+[sum_agent_0] 24/12/2022 14:46:19.307 --> Agent<sum_agent_0@localhost:20000> Sum(2, 2): 4
+[sum_agent_1] 24/12/2022 14:46:19.307 --> Agent<sum_agent_1@localhost:20010> Sum(9, 4): 13
+[sum_agent_2] 24/12/2022 14:46:19.307 --> Agent<sum_agent_2@localhost:20020> Sum(1, 5): 6
+[sum_agent_3] 24/12/2022 14:46:19.307 --> Agent<sum_agent_3@localhost:20030> Sum(4, 7): 11
+[sum_agent_4] 24/12/2022 14:46:19.307 --> Agent<sum_agent_4@localhost:20040> Sum(3, 8): 11

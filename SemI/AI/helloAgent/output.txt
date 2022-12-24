@@ -1,0 +1,5 @@
+[hello_agent_0] 24/12/2022 14:45:17.383 --> Hello World from Agent<hello_agent_0@localhost:20000>!
+[hello_agent_1] 24/12/2022 14:45:17.383 --> Hello World from Agent<hello_agent_1@localhost:20010>!
+[hello_agent_2] 24/12/2022 14:45:17.383 --> Hello World from Agent<hello_agent_2@localhost:20020>!
+[hello_agent_3] 24/12/2022 14:45:17.383 --> Hello World from Agent<hello_agent_3@localhost:20030>!
+[hello_agent_4] 24/12/2022 14:45:17.383 --> Hello World from Agent<hello_agent_4@localhost:20040>!
