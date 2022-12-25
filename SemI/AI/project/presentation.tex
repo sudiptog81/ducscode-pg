@@ -1,0 +1,202 @@
+\documentclass[t]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{lmodern}
+\usepackage{biblatex} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{svg}
+
+\usetheme{CambridgeUS}
+\AtBeginBibliography{\footnotesize}
+\addbibresource{presentation.bib}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+\title{Knowledge-Based Question Answering}
+\author{Sudipto Ghosh}
+\institute{\emph{M.Sc. CS Semester I\\Department of Computer Science\\University of Delhi}}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Overview}
+    \tableofcontents
+\end{frame}
+
+\section{Problem Statement}
+\subsection{Problem Definition}
+\begin{frame}
+    \frametitle{Problem Definition}
+    \begin{itemize}
+    \item Parse unstructured text from domain corpus, identify entities, extract relations, map relations to domain concepts and build knowledge base.\\
+    \textbf{Input:} Corpus, domain ontology, and training examples consisting of entity boundaries, relationship dependencies, valid triples.\\
+    \textbf{Output:} <s,p,o> triples to populate the knowledge graph.
+    \item Model natural language question into a query, infer the facts about it required for the answer, assemble the facts into a natural language answer, and present it to the user.\\
+    \textbf{Input:} Question as a spoken utterance or text prompt.\\
+    \textbf{Output:} Answer/fact as a spoken utterance or text response.
+    \item Ensure system maximizes performance on giving correct answers to a set  of competency questions. 
+    \end{itemize}
+\end{frame}
+
+\subsection{Motivation}
+\begin{frame}
+    \frametitle{Motivation}
+    \begin{itemize}
+    \item Leveraging domain knowledge to improve virtual assistants.
+    \item Inferencing step $\implies$ system can answer unanticipated questions.
+    \item Level of detail can be controlled to suit the expertise of the user.
+    \item Can we answer complex questions that contain multiple subjects, express compound relations, or require simulated thinking?
+    \end{itemize}
+    
+    \begin{example}
+    \textbf{Q:} What is the capital of India?\\
+    \textbf{A:} The capital of India is New Delhi.\\
+    \textbf{Q:} What is the state of motor 2?\\
+    \textbf{A:} Motor 2 is currently turned off.
+    \end{example}
+\end{frame}
+
+\section{Modules}
+\subsection{KB Construction}
+\begin{frame}
+    \frametitle{KB Construction}
+    \begin{itemize}
+    \small{\item Knowledge base construction (KBC) is the process of populating a knowledge base (KB) with facts (or assertions) extracted from data.}
+    \end{itemize}
+    \begin{block}{Sentence}
+        \scriptsize{Paracetamol, also known as acetaminophen, is usually prescribed for treating fever}
+    \end{block}
+    \begin{block}{Entity Recognition}
+        \scriptsize{{\color{red} Paracetamol}, also known as {\color{red} acetaminophen}, is usually prescribed for treating {\color{red} fever}}
+    \end{block}
+    \begin{block}{Relation Extraction}
+        \scriptsize{{\color{red} Paracetamol}, also {\color{teal} known as} {\color{red} acetaminophen}, is usually {\color{teal} prescribed for} treating {\color{red} fever}}
+    \end{block}
+    \begin{block}{Coreference Resolution}
+        \scriptsize{{\color{red} Paracetamol}, also {\color{teal} known as} {\color{red} acetaminophen} | {\color{red} Paracetamol} is usually {\color{teal} prescribed for} treating {\color{red} fever}}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{KB Construction (contd.)}
+    \begin{block}{Triple Extraction}
+        \tiny{<{\color{red} Paracetamol}, {\color{teal} known as}, {\color{red} acetaminophen}>\\ <{\color{red} Paracetamol}, {\color{teal} prescribed for}, {\color{red} fever}>}
+    \end{block}
+    \begin{block}{Entity Linking}
+        \tiny{<{\color{red} https://en.wikipedia.org/wiki/Paracetamol}, {\color{teal} known as}, {\color{red} https://en.wikipedia.org/wiki/Acetaminophen}>\\ <{\color{red} https://en.wikipedia.org/wiki/Paracetamol}, {\color{teal} prescribed for}, {\color{red} https://en.wikipedia.org/wiki/Fever}>}
+    \end{block}
+    \begin{block}{Ontology Mapping}
+        \tiny{prefix {\color{teal} wikidata https://www.wikidata.org/wiki/Property}}\\~\\       \tiny{<{\color{red} https://en.wikipedia.org/wiki/Paracetamol}, {\color{teal} wikidata:P2561}, {\color{red} https://en.wikipedia.org/wiki/Acetaminophen}>\\ <{\color{red} https://en.wikipedia.org/wiki/Paracetamol}, {\color{teal} wikidata:P2176}, {\color{red} https://en.wikipedia.org/wiki/Fever}>}
+    \end{block}
+    \begin{itemize}
+    \small{\item The resultant triples are stored to a triple or RDF store like Blazegraph through semantic queries, or a graph database like Neo4J.}
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Question Understanding}
+\begin{frame}
+    \frametitle{Question Understanding}
+    \begin{itemize}
+    \small{\item Understanding natural language questions refers to the ability to break down a question into the requisite steps for computing its answer.
+    \item Encode questions into low-dimensional vectors with contextual information?
+    \item Calculate semantic similarity between questions and entities in KB?
+    \item Detect and link entities in questions to those in KB and construct queries?}
+    \end{itemize}
+    \begin{block}{Question}
+        \scriptsize{{\color{violet} What} drug is {\color{teal} prescribed for} treating {\color{red} fever}{\color{violet} ?}}
+    \end{block}
+    \begin{block}{Parsed Query}
+        \tiny{<{\color{red} ?}, {\color{teal} prescribed for}, {\color{red} fever}>}
+    \end{block}
+    \begin{block}{Semantic Query}
+        \tiny{<{\color{red} ?}, {\color{teal} https://www.wikidata.org/wiki/Property:P2176}, {\color{red} https://en.wikipedia.org/wiki/Fever}>}
+    \end{block}
+\end{frame}
+
+\subsection{Inferencing Engine}
+\begin{frame}
+    \frametitle{Inferencing Engine}
+    \begin{itemize}
+    \small{\item KBQA Models learn Question Answering by using a QA corpus and a populated KB -- uncertainty, incompleteness and noise are inevitable
+    \item Probabilistic Inferencing $\implies$ infer predicates from templates.
+    \item Offline -- learn the mapping between templates and predicates.
+    \item Online -- break questions down to simple questions, make use of probability distributions, calculate maximum likelihood.
+    \item Entity distribution, template distribution, value (answer) distribution.
+    \item Questions in actual interactions might be vague and unusual.
+    \item Answer questions with entities/predicates matching the top confidence score.}
+    \end{itemize}
+    \begin{example}
+    \footnotesize{\textbf{Template:} what is {\color{teal} treated} by {\color{red} \$medicine}?\\
+    \textbf{Predicate:} {\color{teal} prescribed\_for} (maybe 90.5\%), {\color{teal} founder} (maybe 0.01\%)}
+    \end{example}
+\end{frame}
+
+\section{System Overview}
+\subsection{Use Case Diagram}
+\begin{frame}[c]
+    \frametitle{Use Case Diagram}
+    \begin{figure}
+        \centering
+        \def\svgwidth{\columnwidth}
+        \resizebox{0.55\textwidth}{!}{\input{usecase.pdf_tex}}
+    \end{figure}
+\end{frame}
+
+\subsection{System Architecture}
+\begin{frame}[c]
+    \frametitle{System Architecture}
+    \begin{figure}
+        \centering
+        \def\svgwidth{\columnwidth}
+        \resizebox{1.0\textwidth}{!}{\input{arch.pdf_tex}}
+    \end{figure}
+\end{frame}
+
+\section{}
+\begin{frame}
+    \frametitle{References}
+    \nocite{*}
+    \printbibliography     
+\end{frame}
+
+\section{}
+\begin{frame}[c]
+    \centering
+    \Huge Thank You
+\end{frame}
+
+\end{document}
