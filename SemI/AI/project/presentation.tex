@@ -16,6 +16,7 @@
 \usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{svg}
+\usepackage{caption}
 
 \usetheme{CambridgeUS}
 \AtBeginBibliography{\footnotesize}
@@ -89,6 +90,18 @@
     \end{example}
 \end{frame}
 
+\subsection{Modelling}
+\begin{frame}
+    \frametitle{Modelling}
+    \begin{block}{Information Retrieval Agent}
+    Given documents forming the domain corpus $D$, extract facts and construct a knowledge graph containing entities and semantic relations between them. Percepts are continuously made available in light of quick-updating corpus, knowledge in the KG may be revised based on incoming facts.
+    \end{block}
+    \begin{block}{Conversational KBQA Agent}
+    Given a KG built from facts in domain corpus $D$ and a conversation history ($Q_1$, $A_1$, $Q_2$, $A_2$, $\ldots$), the goal for an reading comprehension / knowledge based conversational QA agent is to answer the $n^{th}$ question $Q_n$ using the whole conversation history as context.\\
+    However, in an open domain conversational QA, user can switch between topics, making the conversation history irrelevant.
+    \end{block}
+\end{frame}
+
 \section{Modules}
 \subsection{KB Construction}
 \begin{frame}
@@ -126,6 +139,44 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}[c]
+    \begin{figure}[h]
+    \includegraphics[width=120mm]{knowledge-graph-example.jpg}
+    {\caption*{\tiny{\emph{Source: Let The Machines Learn}}}}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How?}
+    \begin{itemize}
+        \item Data Collection - scrape domain repository, select domain ontology.
+        \item Use rule-based approaches (e.g. JAPE Grammar) to gather facts from the documents?
+        \item Use language models (e.g. BERT, RoBERTa) and fine-tune it to do the fact extraction?
+        \item Representation Format - RDF, Turtle, N3 in Triple Store - KG.
+        \item Entity Linker needs a KG/Linked Open Data to map entities to.
+    \end{itemize}\
+    \begin{block}{Turtle - Terse RDF Triple Language}
+        \small{RDF Graph in a compact, textual form.}\\
+        {\tiny <http://example.org/\#spiderman> <http://www.perceive.net/relationship/enemyOf> <http://example.org/\#green-goblin> .
+        <http://example.org/\#spiderman> <http://xmlns.com/foaf/0.1/name> "Spiderman" .}
+    \end{block}
+\end{frame}
+
+\begin{frame}[c]
+    \centering JAPE Grammar\\
+    \centering \includegraphics[width=80mm]{Screenshot from 2023-01-20 06-33-39.png}\\
+    {\tiny {\color{red} BENCH}{\color{green}:}{\color{blue}Justice D. Y. Chandrachud}, {\color{magenta} Justice R. K. Krishna}}
+\end{frame}
+
+\begin{frame}[c]
+    \centering \includegraphics[width=100mm]{0_m_kXt3uqZH9e7H4w.png}\\
+    \centering {\tiny Source: BERT (Devlin et. al., 2018)}
+\end{frame}
+
+\begin{frame}[c]
+    \includegraphics[width=120mm]{Screenshot from 2023-01-20 06-19-57.png}
+    \centering {\tiny Source: PersonasOnto}
+\end{frame}
 
 \subsection{Question Understanding}
 \begin{frame}
@@ -146,6 +197,59 @@
         \tiny{<{\color{red} ?}, {\color{teal} https://www.wikidata.org/wiki/Property:P2176}, {\color{red} https://en.wikipedia.org/wiki/Fever}>}
     \end{block}
 \end{frame}
+
+\begin{frame}[c]
+    \frametitle{How?}
+    \begin{itemize}
+        \item Use language model to convert natural language questions to queries.
+        \item Use the correct pattern matching strategy - SPARQL.
+        \item Slot-filling values from question to queries.
+        \item Running the query and retrieving triples.\\
+    \end{itemize}
+    \begin{block}{SPARQL - Querying Language}
+        \tiny Data:\\{\tiny <http://example.org/book/book1> <http://purl.org/dc/elements/1.1/title> "SPARQL Tutorial" .\\
+        <http://example.org/book/book2> <http://purl.org/dc/elements/1.1/title> "Artificial Intelligence" .}\\~\\
+        Query:\\
+        {\tiny SELECT ?book ?title
+WHERE
+\{
+  ?book <http://purl.org/dc/elements/1.1/title> ?title .
+\}}\\~\\
+        Result:\\
+        {\tiny <http://example.org/book/book1>, "SPARQL Tutorial"\\
+        <http://example.org/book/book2>, "Artificial Intelligence"}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Question Understanding (contd.)}
+    \begin{itemize}
+    \small{\item Generate semantically similar queries?
+    \item Rank templates matching question?}
+    \end{itemize}
+    \begin{block}{KB Inferencing}
+        Given a question $Q$, match that with a template that is semantically similar and find a set of triples from the KG that are similar to the entities or relations in the question, find top $K$ triples that might answer the template.
+    \end{block}
+    
+    \begin{block}{Example}
+        \tiny Question: What are the different book titles that are available?\\~\\
+        Query:\\
+        {\tiny SELECT ?book ?title
+WHERE
+\{
+  ?book <http://purl.org/dc/elements/1.1/title> ?title .
+\}} (\~99\%)\\
+{\tiny SELECT ?book ?title
+WHERE
+\{
+  ?book <http://random.org/concept/movie-title> ?title .
+\}} (\~1\%)\\~\\
+        Result:\\
+        {\tiny <http://example.org/book/book1>, "SPARQL Tutorial"\\
+        <http://example.org/book/book2>, "Artificial Intelligence"}
+    \end{block}
+\end{frame}
+
 
 \subsection{Inferencing Engine}
 \begin{frame}
