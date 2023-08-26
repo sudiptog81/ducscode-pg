@@ -8,14 +8,17 @@ def make_matrix(s, n):
   for c in s:
     m[i].append(c)
     i = (i + 1) % n
+  
   return m
 
 def encipher_transposition(s, k):
   c = ''
   s = s.upper()
   m = make_matrix(s, len(k))
+  for r in m:
+    print(r)
   for i in k:
-    c += ''.join(m[i])
+    c += ''.join(m[i - 1])
   return c
 
 def decipher_transposition(c, k):
@@ -23,11 +26,10 @@ def decipher_transposition(c, k):
   _m = {}
   for i in range(len(k)):
     _m[k[i]] = m[i]
-  
   s = ''
   for i in range(len(c)//len(k)):
     for j in range(len(k)):
-      s += _m[j][i]
+      s += _m[j + 1][i]
   return s
 
 s = input("Enter Plaintext: ")

@@ -1,0 +1,94 @@
+---
+title: "Maths Report Script (contd.)"
+author: "Karamjot Kaur, Stuti, Sudipto Ghosh"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r echo=TRUE, warning=FALSE, paged.print=TRUE}
+library(readxl)
+data <- read_excel("NFHS_5_Factsheets_Data.xlsx")
+```
+
+```{r}
+total_data <- data[data$Area == 'Total',]
+total_data <- subset(total_data, select=-c(Area))
+
+library(dplyr)
+library(tidyr)
+total_data %>% 
+  mutate_if(is.numeric, ~replace_na(.,mean(., na.rm = TRUE)))
+```
+
+```{r}
+delivery_care_data <- subset(total_data, select=c(1, 54:60))
+delivery_care_data[c(2:8)] <- sapply(delivery_care_data[c(2:8)], as.numeric)
+delivery_care_data[c(2:8)] <- sapply(delivery_care_data[c(2:8)], abs)
+india_delivery_care_data = delivery_care_data[delivery_care_data$`States/UTs` == 'India',]
+delivery_care_data <- delivery_care_data[delivery_care_data$`States/UTs` != 'India',]
+```
+
+```{r echo=TRUE}
+delivery_care_data$`Births in a private health facility that were delivered by caesarean section (in the 5 years before the survey) (%)`[is.na(delivery_care_data$`Births in a private health facility that were delivered by caesarean section (in the 5 years before the survey) (%)`)] <- 0
+```
+
+```{r}
+summary(delivery_care_data)
+```
+
+Now, we load the map shapefile.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+library(maptools)
+library(rgeos)
+library(ggmap)
+
+shp <- readShapeSpatial('India_State_Boundary.shp')
+plot(shp)
+shp$Name
+```
+
+```{r echo=TRUE, warning=FALSE, paged.print=TRUE}
+shp.f <- fortify(shp, region="Name")
+delivery_care_data$id = delivery_care_data$`States/UTs`
+delivery_care_data$id[delivery_care_data$id == 'Tamil Nadu'] <- 'Tamilnadu'
+delivery_care_data$id[delivery_care_data$id == 'Maharastra'] <- 'Maharashtra'
+delivery_care_data$id[delivery_care_data$id == 'Chhattisgarh'] <- 'Chhattishgarh'
+delivery_care_data$id[delivery_care_data$id == 'Telangana'] <- 'Telengana'
+delivery_care_data$id[delivery_care_data$id == 'Andaman & Nicobar Islands'] <- 'Andaman & Nicobar'
+
+merge.shp.coef <- merge(shp.f, delivery_care_data, by="id")
+d <- merge.shp.coef[order(merge.shp.coef$order), ]
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(pracma)
+library(stringr)
+
+ggplot() +
+  geom_polygon(data = shp.f,
+               aes(x = long, y = lat, group = group), 
+               color = "black", size = 0.25) + 
+  geom_polygon(data = d,
+               aes(x = long, y = lat, group = group, fill = d[[names(delivery_care_data)[5]]]), 
+               color = "black", size = 0.25) + 
+  coord_map()+
+  scale_fill_viridis_c(name='', option = "magma") +
+  labs(title="Births Attended by Trained Medical Personnel")
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+
+delivery_care_data %>% arrange(desc('Births attended by skilled health personnel (in the 5 years before the survey)10 (%)'))
+
+ggplot(data=delivery_care_data, aes(x=.data$`Births attended by skilled health personnel (in the 5 years before the survey)10 (%)`, y=reorder(id, `Births attended by skilled health personnel (in the 5 years before the survey)10 (%)`), fill=id)) +
+  geom_bar(stat="identity", width=0.5) + xlab('') + ylab('') + theme(legend.position = "none") +
+  geom_text(aes(label=str_glue('{.data$`Births attended by skilled health personnel (in the 5 years before the survey)10 (%)`}%')),
+            hjust = 1, nudge_x = -1,
+            color = "black",
+            size = 2)
+```

@@ -1,0 +1,6 @@
+1. View Students
+2. View Teacher
+3. Save Course
+4. Load Course
+5. Exit
+Enter your choice: 

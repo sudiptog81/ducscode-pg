@@ -1,0 +1,10 @@
+prefix schema: <http://schema.org/>
+prefix dc: <http://purl.org/dc/elements/1.1/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix nyon: <https://w3id.org/def/NyOnLegalOntology#>
+prefix : <https://cs.du.ac.in/kg/sudipto#>
+
+:DYChandrachud a nyon:Judge .
+:SKKaul a nyon:Judge .
+:KMJoseph a nyon:Judge .

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sudipto-test-project",
+  "private_key_id": "baa3102c660a804be53802d34c451343373642a5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCsJ2aIrxeARno2\nv6UIg6431QweMJDjsmkwoe58YD3KuOwtY2HA9BKVnYgj+ecvRB87shVOVn357wNY\n0dvrDTJH4mBhAIunTMzXDCSd9qQuYpM8dMQ6PUPgQ6wpTd/0AZGnKhbeTvYRhJwy\n4iZLF2PFSxyozFiQ3n1IGJjYPeaIVLG8b/I8N9xx1Rd2wiVpFH3/6jOHl4MNiDhM\ntM6aRdAOW+rncac+AojyWzJ4eC2jeHXmtk4lBenBM6Pk3i45SKAmqv8TwIQG6eOX\nYJyyq8rZxg+vnwLHS4pTjBsg/omoVeC/SdVD32wwFjPMER8J6P/EX7svCac0LLRs\nucOWfmj/AgMBAAECggEAAhN/Rag0jFoBYyrm4iy8q4L2/PdnfnGRapnqh2sY062l\nxGlTmo0BqWhoEIEU9+7i1IF5KE56uk9Ipwyt5y51Q7208qqu3o4YL6ijBEQVp7HZ\niJOi46zFB5rElfIMHRX3whbccwBrvrG/URdC5cea4LjC4aWrxA/x9YOXnJgocTbQ\nYKhvSmFeZ9wsBb3G/mP81Jipir/6788JQHc2v/UqlC6FexQOfz7YU8XVvFaLVoCZ\nMOp590OEkeAeh1X0zMEIkJ1ekQSF2sDS5EQcVYMYn6TvQyoMrYvfkrKnbmIVaVrf\n+ZTzO26Gejawj0DyuJBXrarji/6TOl8lWvdYdWodoQKBgQDh8tiQZ1Kuwo5tyM0g\nn/8ssz4fugIlUA3Bvuuu3yxzdQOWJO7deyRABb+MBm+szhylFhYprhfH9zr0aftR\nrJIsk+qFdL1FasyCVraj4s5Hi0PEcMbgz56US8dQ+J/sPTwtT3vSaEGYcL1HmRIx\nlGu31j98Ro5vRW0p6vGyRbEwBQKBgQDDDPBpOKJqqNOuSkj+ioE/jD+ojhYLIV4x\nO6Dg8meq25eERk698WkyJa5/4abQlNbmiqCNd8sPlUz1z4TEWeDsP+EIwUfwxc9Z\n8ReRNu3/8qQLrmqWB7dMlAb9vdUDLzfidUNoIGK3DZGbPir2Rz9NRvp42hH/0cOc\nupvR34n4MwKBgA1KaqC74yoyeYxNpntHzgvEE2BsYZnuRpDh+R0VNZkpBef8Dizr\nBGvbqrPC4SjKCvdPAEi9W9rAWTBtV4IrY4HJxZ7KCiQeLx9vmFi1i6q7r2XLuHca\n31obxwKlTUrpIzQLG955kXo1D305rM9LyrZKnPtjbxdufwhbMJJq9Qw9AoGAcehf\nigNyDnnzzShCwqweWP9NueDojK169aOOC3BlDEnbjXsFxzVxqsCIzNP5+HvDmLVC\nl/tqkfouDKuZLJYUncOcZuGBYuISesMqcTqz+TI5jTzZsC5nZIhaINs4x/hOWakD\nqY6oN6Dr9M50hokLNdUKt4Ma2dwlsaTlFMbIKzMCgYBu8JvRJ5Qs3wOps6Y7aESS\nw+4J03/FC2uebja0r1hUhpicKHw/u5lMg13jA0xF64sWe6C86bDmFqGbC3cTWD2F\n/pv07z1mg2yxMF4RVjrsO//j3t+VqK+IBEM/+lcV8gVqArHMhC5TJbNqfi8h1m/u\n5zL54FJVe7iiVbCGlvGMMw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "qa-agent@sudipto-test-project.iam.gserviceaccount.com",
+  "client_id": "114522989807911084342",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/qa-agent%40sudipto-test-project.iam.gserviceaccount.com"
+}

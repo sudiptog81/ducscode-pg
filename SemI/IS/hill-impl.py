@@ -50,7 +50,8 @@ def decipher_hill(s, key):
   return c
 
 s = input('Enter Plaintext: ')
-key = [[6, 15], [13, 4]]
+# key = [[6, 15], [13, 4]]
+key = [[17, 17, 5], [21, 18, 21], [2, 2, 19]]
 print("Key:", key)
 print("Plain Text:", s)
 print("Cipher Text:", encipher_hill(s, key))

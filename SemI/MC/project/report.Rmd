@@ -1,0 +1,115 @@
+---
+title: "Maths Report Script"
+author: "Karamjot Kaur, Stuti, Sudipto Ghosh"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r echo=TRUE, warning=FALSE, paged.print=TRUE}
+library(readxl)
+data <- read_excel("NFHS_5_Factsheets_Data.xlsx")
+```
+
+```{r}
+total_data <- data[data$Area == 'Total',]
+total_data <- subset(total_data, select=-c(Area))
+
+library(dplyr)
+library(tidyr)
+total_data %>% 
+  mutate_if(is.numeric, ~replace_na(.,mean(., na.rm = TRUE)))
+```
+
+```{r}
+delivery_care_data <- subset(total_data, select=c(1, 54:60))
+delivery_care_data[c(2:8)] <- sapply(delivery_care_data[c(2:8)], as.numeric)
+delivery_care_data[c(2:8)] <- sapply(delivery_care_data[c(2:8)], abs)
+india_delivery_care_data = delivery_care_data[delivery_care_data$`States/UTs` == 'India',]
+delivery_care_data <- delivery_care_data[delivery_care_data$`States/UTs` != 'India',]
+```
+
+```{r echo=TRUE}
+delivery_care_data$`Births in a private health facility that were delivered by caesarean section (in the 5 years before the survey) (%)`[is.na(delivery_care_data$`Births in a private health facility that were delivered by caesarean section (in the 5 years before the survey) (%)`)] <- 0
+```
+
+```{r echo=TRUE, warning=FALSE, paged.print=TRUE}
+summary(delivery_care_data)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Institutional births (in the 5 years before the survey) (%)`)
+```
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Institutional births in public facility (in the 5 years before the survey) (%)`)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Home births that were conducted by skilled health personnel  (in the 5 years before the survey)10 (%)`)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Births attended by skilled health personnel (in the 5 years before the survey)10 (%)`)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Births delivered by caesarean section (in the 5 years before the survey) (%)`)
+```
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Births in a private health facility that were delivered by caesarean section (in the 5 years before the survey) (%)`)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+sd(delivery_care_data$`Births in a public health facility that were delivered by caesarean section (in the 5 years before the survey) (%)`)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+ggplot(stack(delivery_care_data[, 2:8]), aes(x=ind, y=values)) +
+  geom_boxplot() + 
+  stat_boxplot(geom = 'errorbar') + 
+  theme(legend.position = "none") + 
+  xlab('') + 
+  ylab('')
+```
+
+Histograms
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+ggplot(delivery_care_data, aes(x=.data[[names(delivery_care_data)[5]]])) + ggtitle(names(delivery_care_data)[5]) + 
+geom_histogram(aes(y = ..density..), colour = 1, fill = "cyan") +
+  geom_density(lwd = 1.2,
+               linetype = 2,
+               colour = 1)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+ggplot(delivery_care_data, aes(x=.data[[names(delivery_care_data)[2]]])) + ggtitle(names(delivery_care_data)[2]) + 
+geom_histogram(aes(y = ..density..), colour = 1, fill = "cyan") +
+  geom_density(lwd = 1.2,
+               linetype = 2,
+               colour = 1)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+
+Pie1 <- read_excel("./Pie1.xlsx")
+percent <- Pie1[,2]
+sectors <- Pie1[,1]
+ggplot(Pie1, aes(x = "", y = Value, fill = Label)) + coord_polar("y", start = 0) + ggtitle(" Distribution of births among Institutional and Non-Institutional Centers ")+ theme(plot.title = element_text(hjust = 0.5, size =20))+ theme_void()+ scale_fill_viridis_d() + geom_bar( stat = "identity", color = "black") + geom_text(aes(label = Value), color = c("black","white","white","white"),position = position_stack(vjust = 0.5),size =3)
+
+
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+colors = c("brown", "orange")
+Sector <- c("Private Sector", "Public Sector")
+regions <- c("Caesarean Delivery", "Normal Delivery")
+# Create the matrix of the values.
+Values <- matrix(c(47.4, 14.3, 52.6, 85.7), nrow = 2, ncol = 2, byrow = TRUE)
+# Create the bar chart
+barplot(Values, main = "Births in Health Institutions", names.arg = Sector, xlab = "Sector", ylab = "Percentage", col = colors, beside = TRUE)
+legend("topleft", regions, cex = 0.9, fill = colors)
+```
