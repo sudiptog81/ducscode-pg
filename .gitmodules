@@ -7,3 +7,6 @@
 [submodule "SemI/AI/pade"]
 	path = SemI/AI/pade
 	url = https://github.com/grei-ufc/pade
+[submodule "SemII/AOS/syscallsCLI"]
+	path = SemII/AOS/syscallsCLI
+	url = https://github.com/sudiptog81/aos-proj.git
