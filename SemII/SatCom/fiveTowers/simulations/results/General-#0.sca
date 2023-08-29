@@ -1,0 +1,58 @@
+version 3
+run General-0-20230530-12:23:38-52056
+attr configname General
+attr datetime 20230530-12:23:38
+attr datetimef 20230530-122338
+attr experiment General
+attr inifile fiveTowers.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network fiveTowers
+attr processid 52056
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network fiveTowers
+
+par fiveTowers.mo.out1.channel typename "\"ned.DelayChannel\""
+par fiveTowers.mo.out1.channel disabled false
+attr mutable ""
+par fiveTowers.mo.out1.channel delay 0.1s
+attr mutable ""
+attr unit s
+par fiveTowers.mo.out2.channel typename "\"ned.DelayChannel\""
+par fiveTowers.mo.out2.channel disabled false
+attr mutable ""
+par fiveTowers.mo.out2.channel delay 0.1s
+attr mutable ""
+attr unit s
+par fiveTowers.mo.out3.channel typename "\"ned.DelayChannel\""
+par fiveTowers.mo.out3.channel disabled false
+attr mutable ""
+par fiveTowers.mo.out3.channel delay 0.1s
+attr mutable ""
+attr unit s
+par fiveTowers.mo.out4.channel typename "\"ned.DelayChannel\""
+par fiveTowers.mo.out4.channel disabled false
+attr mutable ""
+par fiveTowers.mo.out4.channel delay 0.1s
+attr mutable ""
+attr unit s
+par fiveTowers.mo.out5.channel typename "\"ned.DelayChannel\""
+par fiveTowers.mo.out5.channel disabled false
+attr mutable ""
+par fiveTowers.mo.out5.channel delay 0.1s
+attr mutable ""
+attr unit s
+par fiveTowers.tower1 typename "\"fivetowers.simulations.Txc\""
+par fiveTowers.tower2 typename "\"fivetowers.simulations.Txc\""
+par fiveTowers.tower4 typename "\"fivetowers.simulations.Txc\""
+par fiveTowers.tower5 typename "\"fivetowers.simulations.Txc\""
+par fiveTowers.tower3 typename "\"fivetowers.simulations.Txc\""
+par fiveTowers.mo typename "\"fivetowers.simulations.Txc1\""
+par fiveTowers typename "\"fivetowers.simulations.fiveTowers\""
+

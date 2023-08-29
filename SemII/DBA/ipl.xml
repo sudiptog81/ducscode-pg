@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE IPL [
+  <!ELEMENT IPL (team+,game*)>
+  <!ELEMENT team (name,city,coach,players)>
+  <!ATTLIST team id ID #REQUIRED>
+  <!ATTLIST team captain IDREF #REQUIRED>
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT city (#PCDATA)>
+  <!ELEMENT coach (#PCDATA)>
+  <!ELEMENT players (player+)>
+  <!ELEMENT player (name,injury-records)>
+  <!ATTLIST player id ID #REQUIRED>
+  <!ATTLIST player team IDREF #IMPLIED>
+  <!ATTLIST player batting-position (top|middle|tail) #REQUIRED>
+  <!ENTITY top "Top Order">
+  <!ENTITY middle "Middle Order">
+  <!ENTITY tail "Tail Ender">
+  <!ATTLIST player role (batsman|bowler|allrounder) #REQUIRED>
+  <!ENTITY batsman "Batsman">
+  <!ENTITY bowler "Bowler">
+  <!ENTITY allrounder "Allrounder">
+  <!ELEMENT injury-records (injury-record+)>
+  <!ELEMENT injury-record (#PCDATA)>
+  <!ELEMENT number-of-wickets (#PCDATA)>
+  <!ELEMENT runs-scored (#PCDATA)>
+  <!ELEMENT game (date,performance)>
+  <!ELEMENT performance (number-of-wickets*,runs-scored*)>
+  <!ATTLIST performance for IDREF #REQUIRED>
+  <!ELEMENT date (#PCDATA)>
+  <!ATTLIST game host_team IDREF #REQUIRED>
+  <!ATTLIST game guest_team IDREF #REQUIRED>
+]>
+
+<IPL>
+  <team id="rcb" captain="sk">
+    <name>Royal Challengers Bangalore</name>
+    <city>Bangalore</city>
+    <coach>ABC</coach>
+    <players>
+      <player id="sk" team="rcb" role="batsman" batting-position="top">
+        <name>Samrat Kohli</name>
+        <injury-records>
+          <injury-record> Injury in 2017 </injury-record>
+        </injury-records>
+      </player>
+    </players>
+  </team>
+  <team id="kkr" captain="sg">
+    <name>Kolkata Knight Riders</name>
+    <city>Kolkata</city>
+    <coach>XYZ</coach>
+    <players>
+      <player id="sg" team="kkr" role="bowler" batting-position="top">
+        <name>Sourav Ganguly</name>
+        <injury-records>
+          <injury-record> Injury in 2010 </injury-record>
+        </injury-records>
+      </player>
+    </players>
+  </team>
+  <game host_team="rcb" guest_team="kkr">
+    <date>2018-04-08</date>
+    <performance for="sk">
+      <number-of-wickets>5</number-of-wickets>
+      <runs-scored>100</runs-scored>
+    </performance>
+    <performance for="sg">
+      <number-of-wickets>45</number-of-wickets>
+      <runs-scored>100</runs-scored>
+    </performance>
+  </game>
+</IPL>

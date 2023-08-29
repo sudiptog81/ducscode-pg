@@ -1,0 +1,160 @@
+version 3
+run General-0-20230517-14:43:18-40435
+attr configname General
+attr datetime 20230517-14:43:18
+attr datetimef 20230517-144318
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network SourceSink
+attr processid 40435
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network SourceSink
+config cpu-time-limit 60s
+
+par SourceSink.source typename "\"srcsink.Source\""
+par SourceSink.source sendInterval exponential(1s)
+attr unit s
+par SourceSink.sinkA typename "\"srcsink.Sink\""
+statistic SourceSink.sinkA "interarrival times"
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+par SourceSink.sinkB typename "\"srcsink.Sink\""
+statistic SourceSink.sinkB "interarrival times"
+field count 1
+field mean 0
+field stddev nan
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	1
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+par SourceSink.tic typename "\"srcsink.Txc2\""
+par SourceSink.tic sendInitialMessage false
+par SourceSink.tic2 typename "\"srcsink.Txc\""
+par SourceSink.tic2 sendInitialMessage false
+par SourceSink.tic3 typename "\"srcsink.Txc\""
+par SourceSink.tic3 sendInitialMessage false
+par SourceSink.tru typename "\"srcsink.Txc2\""
+par SourceSink.tru sendInitialMessage false
+par SourceSink.tru2 typename "\"srcsink.Txc\""
+par SourceSink.tru2 sendInitialMessage false
+par SourceSink.tru3 typename "\"srcsink.Txc\""
+par SourceSink.tru3 sendInitialMessage false
+par SourceSink typename "\"srcsink.simulations.SourceSink\""
+

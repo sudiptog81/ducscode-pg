@@ -1,0 +1,48 @@
+version 3
+run General-0-20230516-12:00:38-23480
+attr configname General
+attr datetime 20230516-12:00:38
+attr datetimef 20230516-120038
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Tictoc
+attr processid 23480
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network Tictoc
+config cpu-time-limit 60s
+config **.tic.sendInitialMessage true
+
+par Tictoc.tic.out.channel typename "\"ned.DelayChannel\""
+par Tictoc.tic.out.channel disabled false
+attr mutable ""
+par Tictoc.tic.out.channel delay 0.1s
+attr mutable ""
+attr unit s
+par Tictoc.toc.out.channel typename "\"ned.DelayChannel\""
+par Tictoc.toc.out.channel disabled false
+attr mutable ""
+par Tictoc.toc.out.channel delay 0.1s
+attr mutable ""
+attr unit s
+par Tictoc.abc.out.channel typename "\"ned.DelayChannel\""
+par Tictoc.abc.out.channel disabled false
+attr mutable ""
+par Tictoc.abc.out.channel delay 0.1s
+attr mutable ""
+attr unit s
+par Tictoc.tic typename "\"tictac.Txc\""
+par Tictoc.tic sendInitialMessage true
+par Tictoc.toc typename "\"tictac.Txc\""
+par Tictoc.toc sendInitialMessage false
+par Tictoc.abc typename "\"tictac.Txc\""
+par Tictoc.abc sendInitialMessage false
+par Tictoc typename "\"tictac.simulations.Tictoc\""
+

@@ -1,0 +1,28 @@
+version 3
+run General-0-20230517-14:43:18-40435
+attr configname General
+attr datetime 20230517-14:43:18
+attr datetimef 20230517-144318
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network SourceSink
+attr processid 40435
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network SourceSink
+config cpu-time-limit 60s
+
+vector 0 SourceSink.sinkA arrivals ETV
+attr interpolationmode none
+vector 1 SourceSink.sinkB arrivals ETV
+attr interpolationmode none
+0	2	0	1
+1	3	0	1
+

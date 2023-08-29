@@ -1,0 +1,4 @@
+#!/bin/sh
+cd `dirname $0`
+../src/srcsink -n .:../src $*
+# for shared lib, use: opp_run -l ../src/srcsink -n .:../src $*
